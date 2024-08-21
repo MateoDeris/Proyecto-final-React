@@ -1,0 +1,53 @@
+
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #d8c3a5;
+  color: #4e342e; 
+}
+
+.Title {
+  margin: 0;
+  font-size: 24px;
+  color: #ffffff; 
+}
+
+.botones {
+  display: flex;
+  gap: 10px;
+}
+
+.botones button {
+  background-color: #8d6e63;
+  color: #f5f5f5; 
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.botones button:hover {
+  background-color: #a1887f;  
+  transform: scale(1.05); 
+}
+
+
+.badge {
+  background-color: #e57373; 
+  color: white;
+  padding: 5px 10px;
+  border-radius: 50%;
+  font-size: 12px;
+  min-width: 20px;
+  text-align: center;
+  display: inline-block;
+  transition: transform 0.2s ease; 
+}
+
+.badge:hover {
+  transform: scale(1.1); 
+}

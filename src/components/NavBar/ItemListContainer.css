@@ -1,0 +1,21 @@
+.item-list-container {
+    padding: 20px;
+    background-color: #f5f5f5; 
+    border-radius: 15px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    text-align: center;
+    color: #4e342e; 
+    font-family: 'Arial', sans-serif;
+}
+
+.item-list-container h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: normal;
+    text-align: center;
+    padding: 0;
+    text-decoration: none;
+    color: #000000;
+    font-family: cursive;
+    
+}
