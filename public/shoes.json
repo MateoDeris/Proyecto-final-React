@@ -1,0 +1,25 @@
+{
+    "shoes": [
+      {
+        "id": "Z1",
+        "name": "Nike Air Force Tonalidad Gris y Blanco",
+        "price": 180000
+      },
+      {
+        "id": "Z2",
+        "name": "Nike Air Force Tonalidad Gris Oscuro con Blancos",
+        "price": 195000
+      },
+      {
+        "id": "Z3",
+        "name": "Nike Air Force Botita Pipa Oscura",
+        "price": 240000
+      },
+      {
+        "id": "Z4",
+        "name": "Nike Air Force Edición Limitada Red",
+        "price": 165000
+      }
+    ]
+  }
+  

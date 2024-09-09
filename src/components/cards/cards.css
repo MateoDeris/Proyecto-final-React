@@ -1,0 +1,52 @@
+.div-padre {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+  background-color: #333;
+  border-radius: 8px;
+}
+
+.div-padre > div {
+  flex: 1 1 calc(25% - 32px); /* Tamaño normal de las tarjetas */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Controlar la imagen dentro de la card */
+.div-padre img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ccc;
+}
+
+/* RESPONSIVE DESIGN */
+
+/* Para pantallas medianas, como tablets */
+@media (max-width: 1024px) {
+  .div-padre > div {
+    flex: 1 1 calc(33.33% - 32px); /* 3 cards por fila */
+  }
+}
+
+/* Para pantallas pequeñas, como móviles */
+@media (max-width: 768px) {
+  .div-padre > div {
+    flex: 1 1 calc(50% - 32px); /* 2 cards por fila */
+  }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .div-padre > div {
+    flex: 1 1 100%; /* Una card por fila */
+  }
+}

@@ -6,7 +6,7 @@ return (
     <div className='cart-widget'>
         <img src= {cart} alt="cart-widget" width={35} />
             <div className= "badge">
-                <p>2</p>
+                <p>0</p>
             </div>
     </div>
 
