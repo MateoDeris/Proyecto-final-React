@@ -1,45 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import './item.css';
 
-const ItemsDetails = () => {
-  const { id } = useParams(); 
-  const [product, setProduct] = useState(null);
+const ProductDetails = () => {
+    const { id } = useParams();
+    const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetch('/public/shoes.json') // Asegúrate de que la ruta al JSON es correcta
-      .then(res => res.json())
-      .then(data => {
-        const foundProduct = data.shoes.find(p => p.id === id);
-        setProduct(foundProduct);
-      })
-      .catch(err => console.error('Error fetching product details:', err)); 
-  }, [id]);
+    useEffect(() => {
+        const fetchProduct = async () => {
+            try {
+                const response = await fetch('/shoes.json');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                if (Array.isArray(data)) {
+                    const foundProduct = data.find((item) => item.id === parseInt(id));
+                    if (foundProduct) {
+                        setProduct(foundProduct);
+                    } else {
+                        throw new Error('Product not found');
+                    }
+                } else {
+                    throw new Error('Data is not an array');
+                }
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-  const handleAddToCart = () => {
-    console.log('Producto añadido al carrito:', product);
-  };
+        fetchProduct();
+    }, [id]);
 
-  if (!product) {
-    return <p>Producto no encontrado</p>;
-  }
+    if (loading) return <p className="loading-text">Loading...</p>;
+    if (error) return <p className="error-text">Error: {error}</p>;
 
-  return (
-    <div className="item-details">
-      <div className="item-details__images">
-        {}
-        <img src={`/images/${product.id}.jpg`} alt={`${product.name} - Figura`} />
-        <img src={`/images/${product.id}.jpg`} alt={`${product.name} - Caja`} />
-      </div>
-      <div className="item-details__info">
-        <h2>{product.name}</h2>
-        <p>$ {product.price} .-</p>
-        {}
-        <button className="item-details__add-to-cart" onClick={handleAddToCart}>
-          Agregar al Carrito
-        </button>
-      </div>
-    </div>
-  );
+    if (!product) return <p className="not-found-text">Product not found.</p>;
+
+    return (
+        <div className="product-details">
+            <img
+                src={product.image}
+                alt={product.name}
+                className="product-image" 
+            />
+            <h1 className="product-name">{product.name}</h1>
+            <p className="product-price">Price: ${product.price.toFixed(2)}</p>
+        </div>
+    );
 };
 
-export default ItemsDetails;
+export default ProductDetails;
