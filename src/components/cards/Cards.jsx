@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './cards.css';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase/Firebase'; 
+import { db } from '../../firebase/Firebase'; // Importa la variable db
 
 const Cards = () => {
     const [items, setItems] = useState([]);
