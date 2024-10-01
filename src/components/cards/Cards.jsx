@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './cards.css';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase/Firebase'; 
 
 const Cards = () => {
     const [items, setItems] = useState([]);
@@ -11,18 +13,15 @@ const Cards = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('/shoes.json');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                if (Array.isArray(data)) {
-                    setItems(data);
-                } else {
-                    throw new Error('Data is not an array');
-                }
-            } catch (error) {
-                setError(error.message);
+                const productosRef = collection(db, "productos");
+                const resp = await getDocs(productosRef);
+                const fetchedItems = resp.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+               
+                console.log("Fetched Items:", fetchedItems);
+
+                setItems(fetchedItems);
+            } catch (err) {
+                setError(err.message);
             } finally {
                 setLoading(false);
             }
