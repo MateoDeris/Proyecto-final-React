@@ -1,9 +1,8 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore"; // Importa Firestore
+import { getFirestore } from "firebase/firestore"; 
 
-// Your web app's Firebase configuration
+
 const firebaseConfig = {
   apiKey: "AIzaSyAJvntEhyFLfJHHyF_j-Hd-RtuAAxncabI",
   authDomain: "ecommerce-react-63e45.firebaseapp.com",
@@ -14,7 +13,7 @@ const firebaseConfig = {
   measurementId: "G-KN7G23RHTM"
 };
 
-// Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 export const db = getFirestore(app); 

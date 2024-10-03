@@ -8,7 +8,7 @@
 }
 
 .div-padre > div {
-  flex: 1 1 calc(25% - 32px); /* Tamaño normal de las tarjetas */
+  flex: 1 1 calc(25% - 32px);
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -21,32 +21,65 @@
   text-align: center;
 }
 
-/* Controlar la imagen dentro de la card */
+
 .div-padre img {
   width: 100%;
   height: auto;
   border-bottom: 1px solid #ccc;
 }
 
-/* RESPONSIVE DESIGN */
 
-/* Para pantallas medianas, como tablets */
 @media (max-width: 1024px) {
   .div-padre > div {
-    flex: 1 1 calc(33.33% - 32px); /* 3 cards por fila */
+    flex: 1 1 calc(33.33% - 32px);
   }
 }
 
-/* Para pantallas pequeñas, como móviles */
+
 @media (max-width: 768px) {
   .div-padre > div {
-    flex: 1 1 calc(50% - 32px); /* 2 cards por fila */
+    flex: 1 1 calc(50% - 32px); 
   }
 }
 
-/* Para pantallas muy pequeñas */
+
 @media (max-width: 480px) {
   .div-padre > div {
-    flex: 1 1 100%; /* Una card por fila */
+    flex: 1 1 100%; 
   }
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  margin: 10px 0; /* Espacio entre los elementos */
+}
+
+.quantity-controls button {
+  background-color: #007BFF; /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none; /* Sin borde */
+  border-radius: 4px; /* Bordes redondeados */
+  padding: 8px 12px; /* Espaciado interno */
+  cursor: pointer; /* Cambiar cursor al pasar el mouse */
+  margin: 0 5px; /* Espacio entre botones */
+  font-size: 16px; /* Tamaño de la fuente */
+}
+
+.quantity-controls button:hover {
+  background-color: #0056b3;}
+
+button {
+  background-color: #61da61; 
+  color: white; 
+  border: none; 
+  border-radius: 4px; 
+  padding: 10px 20px; 
+  cursor: pointer; 
+  font-size: 16px; 
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #21a339;
 }

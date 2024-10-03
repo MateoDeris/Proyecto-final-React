@@ -1,26 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { db } from '../../firebase/Firebase'; 
-import { doc, getDoc, collection, getDocs } from 'firebase/firestore'; 
+import { db } from '../../firebase/Firebase';
+import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 import './item.css';
+import { CartContext } from '../../context/CartContext';
 
 const ProductDetails = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [productsList, setProductsList] = useState([]); // Estado para la lista de productos
+    const [productsList, setProductsList] = useState([]);
+    const { addToCart } = useContext(CartContext);
 
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const docRef = doc(db, 'productos', id);
+                const docRef = doc(db, 'Productos', id);
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
-                    setProduct(docSnap.data());
+                    setProduct({ id: docSnap.id, ...docSnap.data() });
                 } else {
-                    // Si no se encuentra el producto, no lanzamos un error, solo dejamos product como null
                     setProduct(null);
                 }
             } catch (error) {
@@ -33,14 +34,13 @@ const ProductDetails = () => {
         fetchProduct();
     }, [id]);
 
-    // Efecto para obtener la lista de productos
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const querySnapshot = await getDocs(collection(db, 'productos'));
+                const querySnapshot = await getDocs(collection(db, 'Productos'));
                 const products = [];
                 querySnapshot.forEach((doc) => {
-                    products.push({ id: doc.id, ...doc.data() }); // Agrega el ID del documento a los datos
+                    products.push({ id: doc.id, ...doc.data() });
                 });
                 setProductsList(products);
             } catch (error) {
@@ -54,7 +54,6 @@ const ProductDetails = () => {
     if (loading) return <p className="loading-text">Loading...</p>;
     if (error) return <p className="error-text">Error: {error}</p>;
 
-    // Mostrar tarjetas si el producto no se encuentra
     if (!product) {
         return (
             <div>
@@ -74,17 +73,16 @@ const ProductDetails = () => {
         );
     }
 
+    const handleAddToCart = () => {
+        addToCart({ ...product, quantity: 1 });
+    };
+
     return (
         <div className="product-details">
-            <Link to={`/detalles/${product.id}`} className="product-link">
-                <img
-                    src={product.image} 
-                    alt={product.name} 
-                    className="product-image"
-                />
-                <h1 className="product-name">{product.name}</h1>
-                <p className="product-price">Price: ${product.price.toFixed(2)}</p>
-            </Link>
+            <img src={product.image} alt={product.name} className="product-image" />
+            <h1 className="product-name">{product.name}</h1>
+            <p className="product-price">Precio: ${product.price.toFixed(2)}</p>
+            <button onClick={handleAddToCart} className="add-to-cart-btn">Añadir al carrito</button>
         </div>
     );
 };
